@@ -1,33 +1,66 @@
-pub fn
+use num::bigint::BigUint;
+use num::bigint::ToBigUint;
 
-bool
-miller_rabin(long long n,int t)
-{
-    if (n <  2) return false;
-    if (n == 2) return true;
-    if (!(n&1)) return false;
+use num::Integer;
+use std::num::One;
 
-    long long q = n-1;
-    int k = 0;
-    while ((q&1) == 0) {
-        k++;
-        q >>= 1;
+use rand;
+use rand::Rng;
+
+use std::io::println;
+
+fn mod_exp(mut n : BigUint, mut e : BigUint, m : BigUint) -> BigUint {
+    let zero = (0u).to_biguint().unwrap();
+    let mut res = (1u).to_biguint().unwrap();
+
+    while zero.lt(&e) {
+        if e.is_odd() {
+            res = (res.mul(&n)).mod_floor(&m);
+        }
+        n = (n.mul(&n)).mod_floor(&m);
+        e = e.shr(&1u);
     }
-    for (int i=0; i < t; ++i) {
-        long long a = rand() % (n-1) + 1;
-        long long x = mod_exp(a, q, n);
-        if (x==1) {
+    return res;
+}
+
+pub fn miller_rabin(n :BigUint, t:uint) -> bool {
+    let one = (1u).to_biguint().unwrap();
+    let two = (2u).to_biguint().unwrap();
+    if n.lt(&two) {
+        return false;
+    }
+    else if n.eq(&two) {
+        return true;
+    }
+    else if n.is_even() {
+        return false;
+    }
+
+    let phi_n = n.sub(&one);
+    let rng_lim = phi_n.sub(&one);
+    let mut q = n.sub(&one);
+    let mut k : i32 = 0;
+    while q.is_odd() {
+        k += 1;
+        q = q.shr(&1u);
+    }
+    let mut rng = rand::task_rng();
+    for i in range(0u,t) {
+        let mut a = ( rng.gen::<uint>() ).to_biguint().unwrap();
+        a = a.mod_floor(&rng_lim).add(&one);
+        let mut x = mod_exp(a.clone(), q.clone(), n.clone());
+        if x.eq(&one) {
             continue;
         }
-        bool found = false;
-        for (int j=0; j<k; ++j) {
-            if ( x == n-1) {
+        let mut found : bool = false;
+        for j in range(0,k) {
+            if x.eq(&phi_n) {
                 found = true;
                 break;
             }
-            x = mod_mult(x, x, n);
+            x = (x.mul(&x)).mod_floor(&n);
         }
-        if (found) {
+        if found {
             continue;
         }
         return false;
