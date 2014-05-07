@@ -2,6 +2,11 @@ rust-prime-decomposition
 ========================
 
 rust-prime-decomposition is algorithm library.
+
+#License
+under The MIT License see LICENSE file.
+
+# Algorithm
 ### Probablistic Primary Test
 | Implementation 	| Algorithm            	|
 | ------------:  	| :-----------:        	|
