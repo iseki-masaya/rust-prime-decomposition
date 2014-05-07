@@ -1,0 +1,14 @@
+#!/bin/bash
+
+if [ "$1" = --help ]; then
+    echo "Usage: ./configure"
+    echo
+    echo "Sorry, no command line arguments or anything"
+    exit
+fi
+
+echo configure: writing Makefile
+sed -e "s|%SSL_LIB%|$SSL_LIB|" \
+    -e "s|%SSL_CFG%|$SSL_CFG|" \
+    Makefile.in > Makefile
+echo configure: done!

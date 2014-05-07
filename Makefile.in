@@ -1,0 +1,15 @@
+RUSTC ?= rustc
+BUILDDIR := out
+RUSTFLAGS += -O --cfg ndebug $(RUSTCFGS)
+INSTALL_DIR := %PREFIX%
+
+all:
+	$(RUSTC) $(RUSTFLAGS) --out-dir $(BUILDDIR) src/main.rs
+
+$(BUILDDIR):
+	mkdir -p $@
+
+clean:
+	rm -rf $(BUILDDIR)
+
+.PHONY: all check clean print-target
