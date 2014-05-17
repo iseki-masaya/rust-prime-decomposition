@@ -46,6 +46,10 @@ pub fn miller_rabin(n :BigUint, t:uint) -> bool {
     }
     let mut rng = rand::task_rng();
     for i in range(0u,t) {
+        // let b = ( rng.gen::<uint>() ).to_biguint().unwrap();
+        // let e = ( rng.gen::<uint>() ).to_biguint().unwrap();
+        // let a = mod_exp(b.clone(), e.clone(), n.clone());
+
         let mut a = ( rng.gen::<uint>() ).to_biguint().unwrap();
         a = a.mod_floor(&rng_lim).add(&one);
         let mut x = mod_exp(a.clone(), q.clone(), n.clone());

@@ -1,6 +1,7 @@
 extern crate num;
 extern crate collections;
 extern crate rand;
+extern crate time;
 
 use num::bigint::BigUint;
 use num::bigint::ToBigUint;
@@ -11,6 +12,7 @@ use std::io;
 
 mod sieve;
 mod miller_rabin;
+mod prime_generator;
 
 fn str2big(number:&str) -> BigUint {
     let mut res = (0i).to_biguint().unwrap();
@@ -26,9 +28,10 @@ fn str2big(number:&str) -> BigUint {
 }
 
 fn main() {
-    println("INPUT:");
-    let mut reader = BufferedReader::new(io::stdin());
-    let input = reader.read_line().ok().unwrap();
-    let v = str2big(input);
-    println!("v is \"{}\" number",if miller_rabin::miller_rabin(v.clone(), 20u) {"prime"} else {"composite"});
+    println!("prime:{}", prime_generator::generate_prime_random_choice(1024u));
+    // println("INPUT:");
+    // let mut reader = BufferedReader::new(io::stdin());
+    // let input = reader.read_line().ok().unwrap();
+    // let v = str2big(input);
+    // println!("v is \"{}\" number",if miller_rabin::miller_rabin(v.clone(), 20u) {"prime"} else {"composite"});
 }
