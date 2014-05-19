@@ -7,7 +7,7 @@ rust-prime-decomposition is algorithm library.
 under The MIT License see LICENSE file.
 
 # Algorithm
-### Probablistic Primary Test
+### Probablistic Primarity Test
 | Implementation 	| Algorithm            	|
 | ------------:  	| :-----------:        	|
 | No             	| Fermat method			|
@@ -15,7 +15,7 @@ under The MIT License see LICENSE file.
 | YES             | Miller-Rabin method    |
 | No             	| Lucas-Lehmer method    |
 | No			   	| Frobenius-Grantham method|
-### Deterministic Primary Test
+### Deterministic Primarity Test
 | Implementation 	| Algorithm            	|
 | ------------:  	| :-----------:        	|
 | YES             | Eratosthenes' Sieve		|
@@ -32,7 +32,7 @@ under The MIT License see LICENSE file.
 | No             	| Shawe-Taylor method        		|
 | No             	| Maurer method       		|
 
-### Prime Decomposition
+### Prime Number Decomposition
 | Implementation 	| Algorithm            	|
 | ------------:  	| :-----------:        	|
 | No             	| Trial Division method	|
